@@ -36,3 +36,22 @@ D:\school\jaar-4\dpa\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Music
 D:\school\jaar-4\dpa\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.exe
 D:\school\jaar-4\dpa\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.pdb
 D:\school\jaar-4\dpa\DPA_Startup_Musicsheets\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\DPA_Musicsheets.exe.config
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.exe
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.pdb
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\DPA_Musicsheets.exe
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\DPA_Musicsheets.pdb
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\PSAMControlLibrary.dll
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\PSAMWPFControlLibrary.dll
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.dll
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.pdb
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.xml
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\MainWindow.g.cs
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\App.g.cs
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets_MarkupCompile.cache
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets_MarkupCompile.lref
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\MainWindow.baml
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.g.resources
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.Properties.Resources.resources
+C:\Users\Tijn\Desktop\School\Jaar 4 (Minor software architectuur)\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.GenerateResource.Cache
