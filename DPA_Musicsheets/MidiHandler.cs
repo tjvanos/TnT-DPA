@@ -43,16 +43,10 @@ namespace DPA_Musicsheets
 
         }
 
-        public void addName(string name)
+        internal static void addNote()
         {
-
+            DeezNuts note = new DeezNuts();
+            note.setPitch();
         }
-
-        public void addnote(note)
-        {
-            
-        }
-
-
     }
 }
