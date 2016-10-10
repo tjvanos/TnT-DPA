@@ -113,7 +113,7 @@ namespace DPA_Musicsheets
 
         private void btn_ShowContent_Click(object sender, RoutedEventArgs e)
         {
-            MidiHandler.getStuff(MidiReader.ReadMidi(txt_MidiFilePath.Text));
+        //    MidiHandler.getStuff(MidiReader.ReadMidi(txt_MidiFilePath.Text));
             ShowMidiTracks(MidiReader.ReadMidi(txt_MidiFilePath.Text));
         }
 

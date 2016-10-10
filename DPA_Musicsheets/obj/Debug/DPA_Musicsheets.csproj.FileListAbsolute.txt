@@ -46,7 +46,6 @@ D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\bin\Debug\PSAMWPFControlLibrary.dll
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.dll
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.pdb
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\bin\Debug\Sanford.Multimedia.Midi.xml
-D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\MainWindow.g.cs
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\App.g.cs
 D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets_MarkupCompile.cache
@@ -74,3 +73,4 @@ C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\D
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.g.resources
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.Properties.Resources.resources
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.GenerateResource.Cache
+D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache

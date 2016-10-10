@@ -17,6 +17,17 @@ namespace DPA_Musicsheets
         public bool point { get; set; }
         public bool directionUp { get; set; }//staaf naar boven of onder
 
+        public void setPitch(int pitch)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setOctave(int pitch)
+        {
+            double temp = pitch/12;
+            this.octave = (int)Math.Floor(temp);
+        }
+
 
         // eventueel boogje
 
