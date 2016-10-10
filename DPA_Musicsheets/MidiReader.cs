@@ -20,6 +20,8 @@ namespace DPA_Musicsheets
 
         public static IEnumerable<MidiTrack> ReadSequence(Sequence sequence)
         {
+
+
             // De sequence heeft tracks. Deze zijn per index benaderbaar.
             for (int i = 0; i < sequence.Count; i++)
             {
@@ -41,7 +43,7 @@ namespace DPA_Musicsheets
 
                             if (channelMessage.Command+"" != "Controller")
                             {
-                                MidiHandler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2);
+                                MidiHandler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2,sequence.Division, midiEvent.DeltaTicks);
                             }
 
                             break;
@@ -51,6 +53,7 @@ namespace DPA_Musicsheets
                             break;
                         case MessageType.SystemRealtime:
                             break;
+
                         // Meta zegt iets over de track zelf.
                         case MessageType.Meta:
                             var metaMessage = midiEvent.MidiMessage as MetaMessage;
@@ -60,6 +63,7 @@ namespace DPA_Musicsheets
                                 trackLog.TrackName += " " + Encoding.Default.GetString(metaMessage.GetBytes());
                             }
                             break;
+
                         default:
                             trackLog.Messages.Add(String.Format("MidiEvent {0}, absolute ticks: {1}, deltaTicks: {2}", midiEvent.MidiMessage.MessageType, midiEvent.AbsoluteTicks, midiEvent.DeltaTicks));
                             break;
@@ -76,14 +80,14 @@ namespace DPA_Musicsheets
             switch (metaMessage.MetaType)
             {
                 case MetaType.Tempo:
-                    // Bitshifting is nodig om het tempo in BPM te be
-                    int tempo = (bytes[0] & 0xff) << 16 | (bytes[1] & 0xff) << 8 | (bytes[2] & 0xff);
-                    int bpm = 60000000 / tempo;
+                    // Bitshifting is nodig om het tempo in BPM te berekenen                    
+                    int MicroSecondsPerNote = (bytes[0] & 0xff) << 16 | (bytes[1] & 0xff) << 8 | (bytes[2] & 0xff);
+                    int bpm = 60000000 / MicroSecondsPerNote;
                     return metaMessage.MetaType + ": " + bpm;
                 //case MetaType.SmpteOffset:
                 //    break;
                 case MetaType.TimeSignature:                               //kwart = 1 / 0.25 = 4
-                    return metaMessage.MetaType + ": (" + bytes[0] + " / " + 1 / Math.Pow(bytes[1], -2) + ") ";
+                    return metaMessage.MetaType + ": (" + bytes[0] + " / " + 1 / (int)Math.Pow(2, bytes[1]) + ") ";
                 //case MetaType.KeySignature:
                 //    break;
                 //case MetaType.ProprietaryEvent:

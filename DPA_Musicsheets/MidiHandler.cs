@@ -46,25 +46,33 @@ namespace DPA_Musicsheets
         static Song song = new Song();
         static DeezNuts note = new DeezNuts();
         static int tempAbsoluteTicks;
+        
+        static string[] pitches = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
-        public static void addNote(int pitch, int absoluteTicks, int toneHieight)
+        public static void addNote(int pitch, int absoluteTicks, int toneHieight, int division,int deltaTicks)
         {
-            if (toneHieight > 0)
+            song.TimeSignature = new int[] { 4, 4 };
+            if (toneHieight > 0)//start note, geluid van een noot begint
             {
                 note = new DeezNuts();
                 tempAbsoluteTicks = absoluteTicks;
                 note.setOctave(pitch);
-                note.setPitch(pitch);
+                note.setPitch(pitch, pitches);
+
+                if (deltaTicks > 0) //voor een rust
+                {
+                    note.setRest(true);
+                }
                 //basis logica uit eerste deel van note
             }
-            else
+            else//einde van een noot geen geluid meer
             {
-                //overige time logica
+                note.setDuration(tempAbsoluteTicks,absoluteTicks,division,song.TimeSignature[1]);
+                
                 song.notes.Add(note);
             }
             
         }
-
 
     }
 }
