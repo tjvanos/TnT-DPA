@@ -43,15 +43,14 @@ namespace DPA_Musicsheets
 
         //}
 
-        static Song song = new Song();
-        static DeezNuts note = new DeezNuts();
-        static int tempAbsoluteTicks;
+        public Song song = new Song();
+        DeezNuts note = new DeezNuts();
+        int tempAbsoluteTicks;
         
         static string[] pitches = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
-        public static void addNote(int pitch, int absoluteTicks, int toneHieight, int division,int deltaTicks)
+        public  void addNote(int pitch, int absoluteTicks, int toneHieight, int division,int deltaTicks)
         {
-            song.TimeSignature = new int[] { 4, 4 };
             if (toneHieight > 0)//start note, geluid van een noot begint
             {
                 note = new DeezNuts();
@@ -73,6 +72,20 @@ namespace DPA_Musicsheets
             }
             
         }
+
+        public void addTimeSignature(string timesign)
+        {
+            string[] stringSeparators = new string[] { "(", "/", ")" };
+            string[] result;
+            result = timesign.Split(stringSeparators, StringSplitOptions.None);
+            song.TimeSignature = new int[2] { Int32.Parse(result[1].Trim()), Int32.Parse(result[2].Trim()) };
+        }
+
+        public void addName(string name)
+        {
+            song.name = name;
+        }
+
 
     }
 }
