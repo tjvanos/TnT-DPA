@@ -73,3 +73,4 @@ C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\D
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.g.resources
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.Properties.Resources.resources
 C:\Users\Tijn\Desktop\School\Jaar 4\DPA\Gitproject\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csproj.GenerateResource.Cache
+D:\school\jaar-4\dpa\TnT-DPA\DPA_Musicsheets\obj\Debug\DPA_Musicsheets.csprojResolveAssemblyReference.cache
