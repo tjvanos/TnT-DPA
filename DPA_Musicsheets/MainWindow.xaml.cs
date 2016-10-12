@@ -151,7 +151,7 @@ namespace DPA_Musicsheets
         private void btn_ShowContent_Click(object sender, RoutedEventArgs e)
         {
             String ext = System.IO.Path.GetExtension(txt_FilePath.Text).ToLower();
-
+            //test
             if (ext == ".mid")
             {
                 ShowMidiTracks(MidiReader.ReadMidi(txt_FilePath.Text, midiHandler));
