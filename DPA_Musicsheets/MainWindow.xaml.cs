@@ -159,7 +159,7 @@ namespace DPA_Musicsheets
             }
             else if (ext == ".ly")
             {
-                LilypondReader.OpenLilypond(txt_FilePath.Text);
+                LilypondReader.OpenLilypond(txt_FilePath.Text, lilypondHandler);
                 FillPSAMViewer(lilypondHandler.song);
             }
 

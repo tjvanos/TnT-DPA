@@ -9,12 +9,10 @@ namespace DPA_Musicsheets
 {
     public static class LilypondReader
     {
-        internal static void OpenLilypond(string filePath)
+        internal static void OpenLilypond(string filePath, LilypondHandler handler)
         {
             String rawFile = System.IO.File.ReadAllText(filePath);
             String[] LilypondParts = clearFile(rawFile);
-
-            LilypondHandler handler = new LilypondHandler();
 
             readLilypond(LilypondParts, handler);
            }
