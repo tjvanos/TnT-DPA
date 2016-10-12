@@ -68,10 +68,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class1.cs" />
     <Compile Include="DeezNuts.cs" />
-    <Compile Include="MidiHandler.cs" />
-    <Compile Include="MidiTrack.cs" />
+    <Compile Include="Lilypond\LilypondHandler.cs" />
+    <Compile Include="Lilypond\LilypondReader.cs" />
+    <Compile Include="Midi\MidiHandler.cs" />
+    <Compile Include="Midi\MidiTrack.cs" />
     <Compile Include="Song.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,8 +88,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MidiPlayer.cs" />
-    <Compile Include="MidiReader.cs" />
+    <Compile Include="Midi\MidiPlayer.cs" />
+    <Compile Include="Midi\MidiReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -116,6 +117,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

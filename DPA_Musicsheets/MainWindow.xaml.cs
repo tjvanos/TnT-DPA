@@ -93,15 +93,15 @@ namespace DPA_Musicsheets
             }
 
             _player = new MidiPlayer(_outputDevice);
-            _player.Play(txt_MidiFilePath.Text);
+            _player.Play(txt_FilePath.Text);
         }
 
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Midi Files(.mid)|*.mid" };
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Midi Files(.mid)|*.mid|Lilypond Files(.ly)|*.ly" };
             if (openFileDialog.ShowDialog() == true)
             {
-                txt_MidiFilePath.Text = openFileDialog.FileName;
+                txt_FilePath.Text = openFileDialog.FileName;
             }
         }
         
@@ -113,8 +113,18 @@ namespace DPA_Musicsheets
 
         private void btn_ShowContent_Click(object sender, RoutedEventArgs e)
         {
-        //    MidiHandler.getStuff(MidiReader.ReadMidi(txt_MidiFilePath.Text));
-            ShowMidiTracks(MidiReader.ReadMidi(txt_MidiFilePath.Text));
+            String ext = System.IO.Path.GetExtension(txt_FilePath.Text).ToLower();
+
+            if (ext == ".mid")
+            {
+                ShowMidiTracks(MidiReader.ReadMidi(txt_FilePath.Text));
+            }
+            else if (ext == ".ly")
+            {
+                LilypondReader.OpenLilypond(txt_FilePath.Text);
+            }
+
+
         }
 
         private void ShowMidiTracks(IEnumerable<MidiTrack> midiTracks)
