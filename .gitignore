@@ -47,5 +47,5 @@ Temporary Items
 .apdisk
 
 # Debug files
-/bin/Debug
-/obj/Debug
+DPA_Musicsheets/bin/Debug
+DPA_Musicsheets/obj/Debug
