@@ -27,7 +27,12 @@ namespace DPA_Musicsheets
     public partial class MainWindow : Window
     {
         private MidiPlayer _player;
-        public ObservableCollection<MidiTrack> MidiTracks { get; private set; }
+        public ObservableCollection<MidiTrack> MidiTracks
+        {
+            get; private set;
+        }
+        public MidiHandler midiHandler = new MidiHandler();
+        public LilypondHandler lilypondHandler = new LilypondHandler();
 
         // De OutputDevice is een midi device of het midikanaal van je PC.
         // Hierop gaan we audio streamen.
@@ -78,16 +83,48 @@ namespace DPA_Musicsheets
             staff.AddMusicalSymbol(new Note("C", 0, 4, MusicalSymbolDuration.Half, NoteStemDirection.Up, NoteTieType.None, new List<NoteBeamType>() { NoteBeamType.Single }));
             staff.AddMusicalSymbol(
                 new Note("E", 0, 4, MusicalSymbolDuration.Half, NoteStemDirection.Up, NoteTieType.None, new List<NoteBeamType>() { NoteBeamType.Single })
-                { IsChordElement = true });
+                {
+                    IsChordElement = true
+                });
             staff.AddMusicalSymbol(
                 new Note("G", 0, 4, MusicalSymbolDuration.Half, NoteStemDirection.Up, NoteTieType.None, new List<NoteBeamType>() { NoteBeamType.Single })
-                { IsChordElement = true });
+                {
+                    IsChordElement = true
+                });
             staff.AddMusicalSymbol(new Barline());
+        }
+
+        private void FillPSAMViewer(Song song)
+        {
+            staff.ClearMusicalIncipit();
+
+            // Clef = sleutel
+            staff.AddMusicalSymbol(new Clef(ClefType.GClef, 2));//g
+            staff.AddMusicalSymbol(new TimeSignature(TimeSignatureType.Numbers, (uint)song.TimeSignature[0], (uint)song.TimeSignature[1]));
+
+            //tellen in een maat song.TimeSignature[0]
+            double max = (1.0 / song.TimeSignature[1]) * song.TimeSignature[0];
+            double counter = 0.0;
+
+            foreach (DeezNuts note in song.notes)
+            {
+                if (counter >= max)
+                {
+                    counter = 0.0;
+                    staff.AddMusicalSymbol(new Barline());
+                }
+
+                counter += 1.0/note.duration;
+
+                staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None, new List<NoteBeamType>() { NoteBeamType.Single }));
+
+            }
+
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-            if(_player != null)
+            if (_player != null)
             {
                 _player.Dispose();
             }
@@ -104,7 +141,7 @@ namespace DPA_Musicsheets
                 txt_FilePath.Text = openFileDialog.FileName;
             }
         }
-        
+
         private void btn_Stop_Click(object sender, RoutedEventArgs e)
         {
             if (_player != null)
@@ -117,14 +154,16 @@ namespace DPA_Musicsheets
 
             if (ext == ".mid")
             {
-                ShowMidiTracks(MidiReader.ReadMidi(txt_FilePath.Text));
+                ShowMidiTracks(MidiReader.ReadMidi(txt_FilePath.Text, midiHandler));
+                FillPSAMViewer(midiHandler.song);
             }
             else if (ext == ".ly")
             {
                 LilypondReader.OpenLilypond(txt_FilePath.Text);
+                FillPSAMViewer(lilypondHandler.song);
             }
 
-
+            
         }
 
         private void ShowMidiTracks(IEnumerable<MidiTrack> midiTracks)
@@ -145,6 +184,27 @@ namespace DPA_Musicsheets
             {
                 _player.Dispose();
             }
+        }
+
+        private MusicalSymbolDuration getSymbol(int length)
+        {
+            switch (length)
+            {
+                case 16:
+                    return MusicalSymbolDuration.Sixteenth;
+                case 8:
+                    return MusicalSymbolDuration.Eighth;
+                case 4:
+                    return MusicalSymbolDuration.Quarter;
+                case 2:
+                    return MusicalSymbolDuration.Half;
+                case 1:
+                    return MusicalSymbolDuration.Whole;
+                default:
+                    return MusicalSymbolDuration.Whole;
+            }
+
+
         }
     }
 }

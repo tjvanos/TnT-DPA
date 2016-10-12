@@ -8,7 +8,7 @@ namespace DPA_Musicsheets
 {
     public class LilypondHandler
     {
-        Song song = new Song();
+        public Song song = new Song();
 
         public void setTimeSignature(String signature)
         {

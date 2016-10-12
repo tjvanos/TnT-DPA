@@ -9,15 +9,15 @@ namespace DPA_Musicsheets
 {
     public static class MidiReader
     {
-        public static IEnumerable<MidiTrack> ReadMidi(string midiFileLocation)
+        public static IEnumerable<MidiTrack> ReadMidi(string midiFileLocation, MidiHandler handler)
         {
             var sequence = new Sequence();
             sequence.Load(midiFileLocation);
 
-            return ReadSequence(sequence);
+            return ReadSequence(sequence, handler);
         }
 
-        public static IEnumerable<MidiTrack> ReadSequence(Sequence sequence)
+        public static IEnumerable<MidiTrack> ReadSequence(Sequence sequence,MidiHandler handler)
         {
 
 
@@ -42,7 +42,7 @@ namespace DPA_Musicsheets
 
                             if (channelMessage.Command+"" != "Controller")
                             {
-                                MidiHandler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2,sequence.Division, midiEvent.DeltaTicks);
+                                handler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2,sequence.Division, midiEvent.DeltaTicks);
                             }
 
                             break;
@@ -57,9 +57,17 @@ namespace DPA_Musicsheets
                         case MessageType.Meta:
                             var metaMessage = midiEvent.MidiMessage as MetaMessage;
                             trackLog.Messages.Add(GetMetaString(metaMessage));
+
+                            if (metaMessage.MetaType == MetaType.TimeSignature)
+                            {
+                                handler.addTimeSignature(GetMetaString(metaMessage));
+                            }
+
                             if (metaMessage.MetaType == MetaType.TrackName)
                             {
-                                trackLog.TrackName += " " + Encoding.Default.GetString(metaMessage.GetBytes());
+                                String temp = Encoding.Default.GetString(metaMessage.GetBytes());
+                                trackLog.TrackName += " " + temp;
+                                handler.addName(temp);
                             }
                             break;
 

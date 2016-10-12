@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DPA_Musicsheets
 {
-    class Song
+    public class Song
     {
         public string name { get; set; }
         public int[] TimeSignature { get; set; }
