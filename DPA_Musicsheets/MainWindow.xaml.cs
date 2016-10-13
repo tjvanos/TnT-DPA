@@ -106,8 +106,9 @@ namespace DPA_Musicsheets
             double max = (1.0 / song.TimeSignature[1]) * song.TimeSignature[0];
             double counter = 0.0;
 
-            foreach (DeezNuts note in song.notes)
+            for (int i = 0; i < song.notes.Count(); i++)
             {
+                DeezNuts note = song.notes[i];
                 if (counter >= max)
                 {
                     counter = 0.0;
@@ -116,8 +117,16 @@ namespace DPA_Musicsheets
 
                 counter += 1.0/note.duration;
 
-                staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None, new List<NoteBeamType>() { NoteBeamType.Single }));
-
+                if (i == 0)
+                {
+                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None,/* getConnections(null, note)*/new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                    Console.WriteLine("" + getConnections(null, note).ToString());
+                }
+                else
+                {
+                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                    Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
+                }
             }
 
         }
@@ -205,6 +214,79 @@ namespace DPA_Musicsheets
             }
 
 
+        }
+
+
+        private List<NoteBeamType> getConnections(DeezNuts prev, DeezNuts current)
+        {
+            if (prev == null)
+            {
+                switch (current.duration)
+                {
+                    case 32:
+                        return new List<NoteBeamType>() { NoteBeamType.Start, NoteBeamType.Start, NoteBeamType.Start };
+                    case 16:
+                        return new List<NoteBeamType>() { NoteBeamType.Start, NoteBeamType.Start };
+                    case 8:
+                        return new List<NoteBeamType>() { NoteBeamType.Start };
+                    default:
+                        return new List<NoteBeamType>() { NoteBeamType.Single };
+                }
+            }
+            else
+            {
+                switch (current.duration)
+                {
+                    case 32:
+                        switch (prev.duration)
+                        {
+                            case 32:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Continue, NoteBeamType.Continue };
+                            case 16:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Continue, NoteBeamType.Start };
+                            case 8:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Start, NoteBeamType.Start };
+                            default:
+                                return new List<NoteBeamType>() { NoteBeamType.Start, NoteBeamType.Start, NoteBeamType.Start };
+                        }
+                    case 16:
+                        switch (prev.duration)
+                        {
+                            case 32:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Continue, NoteBeamType.End };
+                            case 16:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Continue };
+                            case 8:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.Start };
+                            default:
+                                return new List<NoteBeamType>() { NoteBeamType.Start, NoteBeamType.Start };
+                        }
+                    case 8:
+                        switch (prev.duration)
+                        {
+                            case 32:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.End, NoteBeamType.End };
+                            case 16:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue, NoteBeamType.ForwardHook };
+                            case 8:
+                                return new List<NoteBeamType>() { NoteBeamType.Continue };
+                            default:
+                                return new List<NoteBeamType>() { NoteBeamType.Start };
+                        }
+                    default:
+                        switch (prev.duration)
+                        {
+                            case 32:
+                                return new List<NoteBeamType>() { NoteBeamType.End, NoteBeamType.End, NoteBeamType.End };
+                            case 16:
+                                return new List<NoteBeamType>() { NoteBeamType.End, NoteBeamType.End };
+                            case 8:
+                                return new List<NoteBeamType>() { NoteBeamType.End };
+                            default:
+                                return new List<NoteBeamType>() { NoteBeamType.Single };
+                        }
+                }
+            }
         }
     }
 }

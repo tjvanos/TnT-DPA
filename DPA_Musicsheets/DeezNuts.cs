@@ -14,7 +14,7 @@ namespace DPA_Musicsheets
         public int type { get; set; } // 0 normal / 1 bis / -1 bes
         public int duration { get; set; }//1 hoeveelste noot bijv 4 = 1/4 noot is een kwart noot
         public bool rest { get; set; }
-        public bool point { get; set; }
+        public int point { get; set; }
         public bool directionUp { get; set; }//staaf naar boven of onder optioneel
 
 
@@ -54,13 +54,13 @@ namespace DPA_Musicsheets
                 if (percentageOfWholeNote <= absoluteNoteLength)//noot maat zonder punt
                 {
                     this.duration = noteLength;
-                    this.point = false;
+                    this.point = 0;
                     break;
                 }
-                if ((percentageOfWholeNote*1.5) <= absoluteNoteLength) //een punt achter een noot is anderhalf keer zijn lengte
+                if (percentageOfWholeNote <= (absoluteNoteLength * 1.5)) //een punt achter een noot is anderhalf keer zijn lengte
                 {
                     this.duration = noteLength;
-                    this.point = true;
+                    this.point = 1;
                     break;
                 }
 
