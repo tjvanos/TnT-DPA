@@ -120,16 +120,19 @@ namespace DPA_Musicsheets
                     staff.AddMusicalSymbol(new Barline());
                 }
 
-                counter += 1.0/note.duration;
+                if (note.point == 1)
+                    counter += 1.0 / note.duration * 1.5;
+                else
+                    counter += 1.0 / note.duration;
 
                 if (i == 0)
                 {
-                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None,/* getConnections(null, note)*/new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None,/* getConnections(null, note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
                     //Console.WriteLine("" + getConnections(null, note).ToString());
                 }
                 else
                 {
-                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
                     //Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
                 }
             }
@@ -223,6 +226,16 @@ namespace DPA_Musicsheets
             }
 
 
+        }
+
+        private NoteStemDirection getDirection(bool directionUp)
+        {
+            if (directionUp)
+                return NoteStemDirection.Up;
+            else if (!directionUp)
+                return NoteStemDirection.Down;
+            else
+                return NoteStemDirection.Up;
         }
 
 

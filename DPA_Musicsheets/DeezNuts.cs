@@ -38,7 +38,7 @@ namespace DPA_Musicsheets
         public void setOctave(int pitch)
         {
             double temp = pitch/12;
-            this.octave = (int)Math.Floor(temp);
+            this.octave = (int)Math.Floor(temp) - 1;
         }
 
         public void setDuration(int previousTicks,int currentTicks, int division, int timesignature)

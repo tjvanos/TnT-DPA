@@ -50,7 +50,6 @@ namespace DPA_Musicsheets
             Char mainPitch = Char.ToUpper(pitch[0]);
             note.point = point;
             note.duration = duration;
-            note.directionUp = true;
 
             //Check if the note is a rest note
             if (mainPitch != 'R')
@@ -67,14 +66,14 @@ namespace DPA_Musicsheets
                 else
                     note.type = 0;
 
-                Char lowest = 'A';
-                Char highest = 'G';
+                Char lowest = 'C';
+                Char highest = 'B';
 
                 //Check how many steps are needed to find the closest pitch on the left side
                 int leftSteps = 0;
                 bool changeOctaveLeft = false;
 
-                for (char C = currentPitch; C > mainPitch; C--)
+                for (char C = currentPitch; C != mainPitch; )
                 {
                     leftSteps++;
 
@@ -83,13 +82,19 @@ namespace DPA_Musicsheets
                         changeOctaveLeft = true;
                         C = highest;
                     }
+                    else if (C == 'A')
+                    {
+                        C = 'G';
+                    }
+                    else
+                        C--;
                 }
 
                 //Check how many steps are needed to find the closest pitch on the right side
                 int rightSteps = 0;
                 bool changeOctaveRight = false;
 
-                for (char C = currentPitch; C < mainPitch; C++)
+                for (char C = currentPitch; C != mainPitch; )
                 {
                     rightSteps++;
 
@@ -98,6 +103,12 @@ namespace DPA_Musicsheets
                         changeOctaveRight = true;
                         C = lowest;
                     }
+                    else if (C == 'G')
+                    {
+                        C = 'A';
+                    }
+                    else
+                        C++;
                 }
 
                 //Determine if either right or left way is shorter
@@ -109,16 +120,25 @@ namespace DPA_Musicsheets
                
                 else
                     note.octave = currentOctave;
-                
 
-                note.pitch = mainPitch;
+                //Check in which direction the stem should point
+                if ((note.octave > 4) || (note.octave == 4 && mainPitch == 'B'))
+                {
+                    note.directionUp = false;
+                }
+                else
+                    note.directionUp = true;
+                
             }
 
             //Else, note is a rest note
             else
             {
                 note.rest = true;
+                note.octave = currentOctave;
             }
+
+            note.pitch = mainPitch;
 
 
 

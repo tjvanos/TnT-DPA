@@ -63,6 +63,14 @@ namespace DPA_Musicsheets
                     note.setRest(true);
                 }
                 //basis logica uit eerste deel van note
+
+                //Check in which direction the stem should point
+                if ((note.octave > 4) || (note.octave == 4 && note.pitch == 'B'))
+                {
+                    note.directionUp = false;
+                }
+                else
+                    note.directionUp = true;
             }
             else//einde van een noot geen geluid meer
             {

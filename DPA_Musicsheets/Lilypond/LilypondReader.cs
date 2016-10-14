@@ -105,11 +105,10 @@ namespace DPA_Musicsheets
                             DeezNuts note = handler.createNote(currentPitch, currentOctave, pitch, duration, point);
                             handler.song.notes.Add(note);
 
-                            currentOctave = note.octave;
-
                             if (!pitch.Equals("R"))
                             {
                                 currentPitch = Char.ToUpper(pitch[0]);
+                                currentOctave = note.octave;
                             }
 
                             break;
