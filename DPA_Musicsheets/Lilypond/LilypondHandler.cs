@@ -42,7 +42,7 @@ namespace DPA_Musicsheets
                 return 0;
         }
 
-        internal DeezNuts createNote(char currentPitch, int currentOctave, string pitch, int duration, bool point)
+        internal DeezNuts createNote(char currentPitch, int currentOctave, string pitch, int duration, int point)
         {
             //Create a new note and set some values
             DeezNuts note = new DeezNuts();
