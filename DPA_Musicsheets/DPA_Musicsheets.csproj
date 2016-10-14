@@ -69,6 +69,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DeezNuts.cs" />
+    <Compile Include="Handlers\EtcHandler.cs" />
+    <Compile Include="Handlers\MusicHandler.cs" />
+    <Compile Include="Handlers\ExplorerHandler.cs" />
+    <Compile Include="Handlers\MainHandler.cs" />
     <Compile Include="Lilypond\LilypondHandler.cs" />
     <Compile Include="Lilypond\LilypondReader.cs" />
     <Compile Include="Midi\MidiHandler.cs" />

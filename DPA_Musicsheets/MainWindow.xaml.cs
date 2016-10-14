@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DPA_Musicsheets.Handlers;
+using Microsoft.Win32;
 using PSAMControlLibrary;
 using Sanford.Multimedia.Midi;
 using System;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -44,9 +46,12 @@ namespace DPA_Musicsheets
             this.MidiTracks = new ObservableCollection<MidiTrack>();
             InitializeComponent();
             DataContext = MidiTracks;
-            FillPSAMViewer();
-            //notenbalk.LoadFromXmlFile("Resources/example.xml");
-        }
+            timer();
+            editor.Visibility = Visibility.Hidden;
+            tabCtrl_MidiContent.Visibility = Visibility.Visible;
+
+        //notenbalk.LoadFromXmlFile("Resources/example.xml");
+    }
 
         private void FillPSAMViewer()
         {
@@ -120,12 +125,12 @@ namespace DPA_Musicsheets
                 if (i == 0)
                 {
                     staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None,/* getConnections(null, note)*/new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
-                    Console.WriteLine("" + getConnections(null, note).ToString());
+                    //Console.WriteLine("" + getConnections(null, note).ToString());
                 }
                 else
                 {
                     staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave - 1, getSymbol(note.duration), NoteStemDirection.Up, NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
-                    Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
+                    //Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
                 }
             }
 
@@ -165,11 +170,15 @@ namespace DPA_Musicsheets
             {
                 ShowMidiTracks(MidiReader.ReadMidi(txt_FilePath.Text, midiHandler));
                 FillPSAMViewer(midiHandler.song);
+                editor.Visibility = Visibility.Hidden;
+                tabCtrl_MidiContent.Visibility = Visibility.Visible;
             }
             else if (ext == ".ly")
             {
                 LilypondReader.OpenLilypond(txt_FilePath.Text, lilypondHandler);
                 FillPSAMViewer(lilypondHandler.song);
+                editor.Visibility = Visibility.Visible;
+                tabCtrl_MidiContent.Visibility = Visibility.Hidden;
             }
 
             
@@ -288,5 +297,72 @@ namespace DPA_Musicsheets
                 }
             }
         }
+
+
+        private DateTime _now;
+        private Timer _timer = new Timer();
+        private bool _typed = false;
+
+        public void checkChange(object sender, KeyEventArgs e)
+        {
+            _typed = true;
+            _now = DateTime.Now;
+        }
+
+        private void timer()
+        {
+            _timer.Elapsed += new ElapsedEventHandler(UpdateStaff);
+            _timer.Interval = 1500;
+            _timer.Enabled = true;
+        }
+
+        private void UpdateStaff(object source, ElapsedEventArgs e)
+        {
+            TimeSpan timeElapsed = DateTime.Now - _now;
+            if (timeElapsed.TotalMilliseconds > 1500 && _typed)
+            {
+                _typed = false;
+                Application.Current.Dispatcher.Invoke(new Action(() => {
+                    //LyToObject lyToObject = new LyToObject(textBox.Text);
+                    //drawTrack(lyToObject.getTrackObject());
+                    // update bar drawing lillyP
+                    Console.WriteLine("je hebt getypt gie");
+                }));
+            }
+        }
+
+
+
+        private List<System.Windows.Input.Key> _keysDown = new List<System.Windows.Input.Key>();
+
+        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            checkChange(sender,e);
+            //setup handlers
+            ExplorerHandler expHandler = new ExplorerHandler();
+            MusicHandler musHandler = new MusicHandler();
+            EtcHandler etcHandler = new EtcHandler();
+
+            expHandler.SetSuccessor(musHandler);
+            musHandler.SetSuccessor(etcHandler);
+
+            _keysDown.Add(e.Key);
+
+            if (_keysDown.Count>1)
+            {
+                if (expHandler.HandleRequest(_keysDown)) // The chain always returns handled/not handled.
+                {
+                    e.Handled = true; // This key doesn't show up in the editor anymore.
+                    _keysDown.Clear();
+                }
+            }
+
+        }
+
+        private void textBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            _keysDown.Remove(e.Key);
+        }
+
     }
 }

@@ -79,7 +79,7 @@ namespace DPA_Musicsheets
                         String pitch;
                         String sign;
                         int duration;
-                        bool point;
+                        int point;
 
                         if (Regex.IsMatch(noteString, pattern))
                         {
@@ -87,7 +87,7 @@ namespace DPA_Musicsheets
                             pitch = r.Match(noteString).Result("${pitch}").ToUpper();
                             sign = r.Match(noteString).Result("${sign}");
                             duration = Int32.Parse(r.Match(noteString).Result("${duration}"));
-                            point = (r.Match(noteString).Result("${point}") == ".");
+                            point = (r.Match(noteString).Result("${point}").Count());
 
                             if (sign != null)
                             {

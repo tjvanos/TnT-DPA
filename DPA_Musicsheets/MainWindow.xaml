@@ -36,7 +36,22 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        <PSAMWPFControl:IncipitViewerWPF HorizontalAlignment="Left" Margin="10,305,-2961,25" Width="3468" x:Name="staff" >
-        </PSAMWPFControl:IncipitViewerWPF>
+
+        <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="10,314,0,0" VerticalAlignment="Top" Width="497" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <PSAMWPFControl:IncipitViewerWPF HorizontalAlignment="Left" Width="6802" x:Name="staff" RenderTransformOrigin="0.5,0.5" >
+                <PSAMWPFControl:IncipitViewerWPF.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.095"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </PSAMWPFControl:IncipitViewerWPF.RenderTransform>
+            </PSAMWPFControl:IncipitViewerWPF>
+        </ScrollViewer>
+
+        
+        <TextBox x:Name="editor" HorizontalAlignment="Left" Margin="10,60,0,0" Text="Write some LillyPond" VerticalAlignment="Top" Height="226" Width="497" KeyUp="textBox_KeyUp" KeyDown="textBox_KeyDown"/>
+
     </Grid>
 </Window>
