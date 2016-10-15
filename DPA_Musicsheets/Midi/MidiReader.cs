@@ -42,7 +42,7 @@ namespace DPA_Musicsheets
 
                             if (channelMessage.Command+"" != "Controller")
                             {
-                                handler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2,sequence.Division, midiEvent.DeltaTicks);
+                                handler.addNote(channelMessage.Data1, midiEvent.AbsoluteTicks, channelMessage.Data2,sequence.Division, midiEvent.DeltaTicks, channelMessage.Command.ToString());
                             }
 
                             break;

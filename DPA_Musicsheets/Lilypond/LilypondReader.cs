@@ -17,7 +17,7 @@ namespace DPA_Musicsheets
             readLilypond(LilypondParts, handler);
            }
 
-        private static string[] cleanFile(string rawFile)
+        public static string[] cleanFile(string rawFile)
         {
             //First of all remove unnecessary characters
             String newFile = rawFile

@@ -29,6 +29,7 @@ namespace DPA_Musicsheets
     public partial class MainWindow : Window
     {
         private MidiPlayer _player;
+        private string workingState;
         public ObservableCollection<MidiTrack> MidiTracks
         {
             get; private set;
@@ -181,8 +182,10 @@ namespace DPA_Musicsheets
                 LilypondReader.OpenLilypond(txt_FilePath.Text, lilypondHandler);
                 FillPSAMViewer(lilypondHandler.song);
                 editor.Visibility = Visibility.Visible;
+                editor.Text = System.IO.File.ReadAllText(txt_FilePath.Text);
                 tabCtrl_MidiContent.Visibility = Visibility.Hidden;
-            }
+                workingState = editor.Text;
+    }
 
             
         }
@@ -329,6 +332,7 @@ namespace DPA_Musicsheets
             _timer.Enabled = true;
         }
 
+
         private void UpdateStaff(object source, ElapsedEventArgs e)
         {
             TimeSpan timeElapsed = DateTime.Now - _now;
@@ -336,10 +340,22 @@ namespace DPA_Musicsheets
             {
                 _typed = false;
                 Application.Current.Dispatcher.Invoke(new Action(() => {
-                    //LyToObject lyToObject = new LyToObject(textBox.Text);
-                    //drawTrack(lyToObject.getTrackObject());
-                    // update bar drawing lillyP
-                    Console.WriteLine("je hebt getypt gie");
+                    try
+                    {
+                        String rawFile = editor.Text;
+                        String[] LilypondParts = LilypondReader.cleanFile(rawFile);
+                        lilypondHandler.reset();
+                        LilypondReader.readLilypond(LilypondParts, lilypondHandler);
+                        FillPSAMViewer(lilypondHandler.song);
+                        Console.WriteLine("Bar is updated");
+                        workingState = editor.Text;
+                    }
+                    catch (Exception ex)
+                    {
+                        editor.Text = workingState;
+                        Console.WriteLine("invalid input");
+                    }
+
                 }));
             }
         }
@@ -350,6 +366,7 @@ namespace DPA_Musicsheets
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
+
             checkChange(sender,e);
             //setup handlers
             ExplorerHandler expHandler = new ExplorerHandler();
@@ -359,10 +376,17 @@ namespace DPA_Musicsheets
             expHandler.SetSuccessor(musHandler);
             musHandler.SetSuccessor(etcHandler);
 
-            _keysDown.Add(e.Key);
+            System.Windows.Input.Key key = (e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
+            _keysDown.Add(key);
+        
+            
 
             if (_keysDown.Count>1)
             {
+                expHandler.setStuffToSave(editor.Text);
+                expHandler.setTextbox(txt_FilePath);
+                musHandler.setBox(editor);
+
                 if (expHandler.HandleRequest(_keysDown)) // The chain always returns handled/not handled.
                 {
                     e.Handled = true; // This key doesn't show up in the editor anymore.
@@ -374,7 +398,13 @@ namespace DPA_Musicsheets
 
         private void textBox_KeyUp(object sender, KeyEventArgs e)
         {
-            _keysDown.Remove(e.Key);
+            if (e.Key == System.Windows.Input.Key.Back || e.Key == System.Windows.Input.Key.Delete)
+            {
+                checkChange(sender, e);
+            }
+
+            System.Windows.Input.Key key = (e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
+            _keysDown.Remove(key);
         }
 
     }

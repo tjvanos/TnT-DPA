@@ -1,0 +1,58 @@
+eigen domein klassen							10% 0/3 completed
+	volledig							-
+	structural paterns om rusten noten etc te representeren		-
+	patronen voor uitbreidbaarheid					-
+MIDI									20% 2/5 completed
+	in lezen							- Done
+	noteOn en data 2 mogelijk					- Done
+	creatiepatroon gescheiden van midikennis			-
+	creatiepatroon kan noten maken zonder switch if else		-
+	een doel per methode						-
+Noten weergeven								10% 2/6 completed
+	Correcte weergave						-
+	domeinklassen geen kennis wpf					- Done
+	processlogica geen kennis wpf					- Done
+	behavioural patroon gebruikt voor creeren wpf			-
+	geen if else switch nodig voor rust of gewone noot		-
+	balken toevoegen als het buiten het beeld zou vallen		-
+Lilypond								20% 1/8 completed
+	correct inlezen							- Done
+	weggeschreven worden (opslaan als)				-
+	processlogica geen kennis van lilypond				-
+	domeinklassen geen kennis van lillypond				-
+	een doel per methode						-
+	met/zonder maatstrepen ondersteund				-
+	maatwisselingen ondersteund					-
+	patronen uitbreidbaarheid					-
+editor1									15% 2/8 completed
+	langer dan 1.5 sec niet typen generen				- Done
+	doortypen tijdens generen					- Done
+	eventuele undo 							-
+	opslaan bij afsluiten						-
+	state en memento pattern toegepast volgens regels		-
+	geen onnodige if else 						-
+	een doel per methode						-
+	state pattern kent zelf de volgende state niet			-
+editor2									15% 0/6 completed
+	keyboard shortcuts						-	
+	chain of responsibillity patern					-
+	command patern							-
+	command pattern kent the shortcuts niet				-
+	command pattern hergebruikt code				-
+	3 toetsen bij elkaar combinatie					-
+extra									10% 1/5 completed
+	herhalingen ondersteunen					-
+	doorlinken noten						-
+	highlighting keyowrds in de editor				-
+	sleutel bepaling						-
+	staven van noten						- Done
+
+
+
+
+
+
+
+
+
+

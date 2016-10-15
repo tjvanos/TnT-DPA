@@ -68,6 +68,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\TempoCommand.cs" />
+    <Compile Include="Commands\OpenCommand.cs" />
+    <Compile Include="Commands\ClefCommand.cs" />
+    <Compile Include="Commands\SavePDFCommand.cs" />
+    <Compile Include="Commands\SaveCommandcs.cs" />
     <Compile Include="DeezNuts.cs" />
     <Compile Include="Handlers\EtcHandler.cs" />
     <Compile Include="Handlers\MusicHandler.cs" />
