@@ -30,6 +30,10 @@ namespace DPA_Musicsheets
     {
         private MidiPlayer _player;
         private string workingState;
+        private DateTime _now;
+        private Timer _timer = new Timer();
+        private bool _typed = false;
+
         public ObservableCollection<MidiTrack> MidiTracks
         {
             get; private set;
@@ -51,8 +55,8 @@ namespace DPA_Musicsheets
             editor.Visibility = Visibility.Hidden;
             tabCtrl_MidiContent.Visibility = Visibility.Visible;
 
-        //notenbalk.LoadFromXmlFile("Resources/example.xml");
-    }
+            //notenbalk.LoadFromXmlFile("Resources/example.xml");
+        }
 
         private void FillPSAMViewer()
         {
@@ -185,9 +189,9 @@ namespace DPA_Musicsheets
                 editor.Text = System.IO.File.ReadAllText(txt_FilePath.Text);
                 tabCtrl_MidiContent.Visibility = Visibility.Hidden;
                 workingState = editor.Text;
-    }
+            }
 
-            
+
         }
 
         private void ShowMidiTracks(IEnumerable<MidiTrack> midiTracks)
@@ -240,7 +244,6 @@ namespace DPA_Musicsheets
             else
                 return NoteStemDirection.Up;
         }
-
 
         private List<NoteBeamType> getConnections(DeezNuts prev, DeezNuts current)
         {
@@ -314,11 +317,6 @@ namespace DPA_Musicsheets
             }
         }
 
-
-        private DateTime _now;
-        private Timer _timer = new Timer();
-        private bool _typed = false;
-
         public void checkChange(object sender, KeyEventArgs e)
         {
             _typed = true;
@@ -332,14 +330,14 @@ namespace DPA_Musicsheets
             _timer.Enabled = true;
         }
 
-
         private void UpdateStaff(object source, ElapsedEventArgs e)
         {
             TimeSpan timeElapsed = DateTime.Now - _now;
             if (timeElapsed.TotalMilliseconds > 1500 && _typed)
             {
                 _typed = false;
-                Application.Current.Dispatcher.Invoke(new Action(() => {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
                     try
                     {
                         String rawFile = editor.Text;
@@ -360,14 +358,12 @@ namespace DPA_Musicsheets
             }
         }
 
-
-
         private List<System.Windows.Input.Key> _keysDown = new List<System.Windows.Input.Key>();
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
 
-            checkChange(sender,e);
+            checkChange(sender, e);
             //setup handlers
             ExplorerHandler expHandler = new ExplorerHandler();
             MusicHandler musHandler = new MusicHandler();
@@ -378,10 +374,10 @@ namespace DPA_Musicsheets
 
             System.Windows.Input.Key key = (e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
             _keysDown.Add(key);
-        
-            
 
-            if (_keysDown.Count>1)
+
+
+            if (_keysDown.Count > 1)
             {
                 expHandler.setStuffToSave(editor.Text);
                 expHandler.setTextbox(txt_FilePath);
