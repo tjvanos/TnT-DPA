@@ -8,13 +8,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="525" Closing="Window_Closing">
     <Grid x:Name="MainGrid">
-        <TextBox x:Name="txt_FilePath" HorizontalAlignment="Left" Height="23" Margin="90,10,0,0" TextWrapping="Wrap" Text="../../../eendjes.ly" VerticalAlignment="Top" Width="233" />
-        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="353,11,0,0" VerticalAlignment="Top" Width="75" Click="btnPlay_Click"/>
-        <Button x:Name="btnOpen" Content="Open" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>
-        <Button x:Name="btn_Stop" Content="Stop" HorizontalAlignment="Left" Margin="433,11,0,0" VerticalAlignment="Top" Width="75" Click="btn_Stop_Click"/>
-        <Button x:Name="btn_ShowContent" Content="Show content" HorizontalAlignment="Left" Margin="353,35,0,0" VerticalAlignment="Top" Width="155" Click="btn_ShowContent_Click"/>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Bestand">
+                    <MenuItem Header="Open nieuw bestand" Click="menuOpen_click"/>
+                    <MenuItem Header="Opslaan als Lilypond" Click="menuSaveLily_click"/>
+                    <Separator />
+                    <MenuItem Header="Afsluiten" Click="menuExit_click"/>
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
 
-        <TabControl x:Name="tabCtrl_MidiContent" HorizontalAlignment="Left" Height="227" Margin="10,59,0,0" VerticalAlignment="Top" Width="498" ItemsSource="{Binding}" >
+        <TextBox x:Name="txt_FilePath" HorizontalAlignment="Left" Height="23" Margin="90,27,0,0" TextWrapping="Wrap" Text="../../../eendjes.ly" VerticalAlignment="Top" Width="233" />
+        <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Left" Margin="353,28,0,0" VerticalAlignment="Top" Width="75" Click="btnPlay_Click"/>
+        <Button x:Name="btnOpen" Content="Open" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>
+        <Button x:Name="btn_Stop" Content="Stop" HorizontalAlignment="Left" Margin="433,28,0,0" VerticalAlignment="Top" Width="75" Click="btn_Stop_Click"/>
+        <Button x:Name="btn_ShowContent" Content="Show content" HorizontalAlignment="Left" Margin="353,52,0,0" VerticalAlignment="Top" Width="155" Click="btn_ShowContent_Click"/>
+
+        <TabControl x:Name="tabCtrl_MidiContent" HorizontalAlignment="Left" Height="227" Margin="10,77,0,0" VerticalAlignment="Top" Width="498" ItemsSource="{Binding}" >
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Header">
@@ -37,7 +49,7 @@
             </TabControl.ContentTemplate>
         </TabControl>
 
-        <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="10,314,0,0" VerticalAlignment="Top" Width="497" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <ScrollViewer HorizontalAlignment="Left" Height="100" Margin="10,331,0,0" VerticalAlignment="Top" Width="497" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <PSAMWPFControl:IncipitViewerWPF HorizontalAlignment="Left" Width="6802" x:Name="staff" RenderTransformOrigin="0.5,0.5" >
                 <PSAMWPFControl:IncipitViewerWPF.RenderTransform>
                     <TransformGroup>
@@ -51,7 +63,7 @@
         </ScrollViewer>
 
 
-        <TextBox x:Name="editor" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Left" Margin="10,60,0,0" Text="Write some LillyPond" VerticalAlignment="Top" Height="226" Width="497" KeyUp="textBox_KeyUp" KeyDown="textBox_KeyDown"/>
+        <TextBox x:Name="editor" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" HorizontalAlignment="Left" Margin="10,77,0,0" Text="Write some LillyPond" VerticalAlignment="Top" Height="226" Width="497" KeyUp="textBox_KeyUp" KeyDown="textBox_KeyDown"/>
 
     </Grid>
 </Window>

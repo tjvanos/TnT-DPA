@@ -38,8 +38,12 @@ namespace DPA_Musicsheets
         {
             get; private set;
         }
+        //setup handlers
         public MidiHandler midiHandler = new MidiHandler();
         public LilypondHandler lilypondHandler = new LilypondHandler();
+        ExplorerHandler expHandler = new ExplorerHandler();
+        MusicHandler musHandler = new MusicHandler();
+        EtcHandler etcHandler = new EtcHandler();
 
         // De OutputDevice is een midi device of het midikanaal van je PC.
         // Hierop gaan we audio streamen.
@@ -372,10 +376,6 @@ namespace DPA_Musicsheets
         {
 
             checkChange(sender, e);
-            //setup handlers
-            ExplorerHandler expHandler = new ExplorerHandler();
-            MusicHandler musHandler = new MusicHandler();
-            EtcHandler etcHandler = new EtcHandler();
 
             expHandler.SetSuccessor(musHandler);
             musHandler.SetSuccessor(etcHandler);
@@ -414,6 +414,19 @@ namespace DPA_Musicsheets
             {
                 _keysDown.Clear();
             }
+        }
+
+        private void menuSaveLily_click(object sender, RoutedEventArgs e)
+        {
+            expHandler.RequestSaveLilypond();
+        }
+        private void menuOpen_click(object sender, RoutedEventArgs e)
+        {
+            expHandler.RequestOpen();
+        }
+        private void menuExit_click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
     }

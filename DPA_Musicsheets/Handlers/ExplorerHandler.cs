@@ -31,27 +31,15 @@ namespace DPA_Musicsheets.Handlers
         {
 
             if (request.Contains(System.Windows.Input.Key.S) && request.Contains(System.Windows.Input.Key.P) && request.Contains(System.Windows.Input.Key.LeftCtrl))
-            {
-                Console.WriteLine("Time to save things as PDF");//todo
+                return RequestSavePDF();
 
-                PDFHandler.setContent(stuffToSave);
-                PDFHandler.execute();
-                return true;
-            }
             else if (request.Contains(System.Windows.Input.Key.S)&& request.Contains(System.Windows.Input.Key.LeftCtrl))
             {
-                Console.WriteLine("Time to save things as lillypond");
-
-                saveHandler.setContent(stuffToSave);
-                saveHandler.execute();
-                return true;
+                return RequestSaveLilypond();
             }
             else if (request.Contains(System.Windows.Input.Key.O) && request.Contains(System.Windows.Input.Key.LeftCtrl))
             {
-                Console.WriteLine("Time to open some files!");
-                openHandler.settextBox(open);
-                openHandler.execute();
-                return true;
+                return RequestOpen();
             }
             else if (successor != null)
             {
@@ -59,6 +47,32 @@ namespace DPA_Musicsheets.Handlers
             }
 
             return false;
+        }
+
+        public bool RequestSaveLilypond()
+        {
+            Console.WriteLine("Time to save things as lillypond");
+
+            saveHandler.setContent(stuffToSave);
+            saveHandler.execute();
+            return true;
+        }
+
+        public bool RequestSavePDF()
+        {
+            Console.WriteLine("Time to save things as PDF");//todo
+
+            PDFHandler.setContent(stuffToSave);
+            PDFHandler.execute();
+            return true;
+        }
+
+        public bool RequestOpen()
+        {
+            Console.WriteLine("Time to open some files!");
+            openHandler.settextBox(open);
+            openHandler.execute();
+            return true;
         }
 
     }
