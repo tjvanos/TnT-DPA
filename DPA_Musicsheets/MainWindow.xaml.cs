@@ -130,15 +130,23 @@ namespace DPA_Musicsheets
                 else
                     counter += 1.0 / note.duration;
 
-                if (i == 0)
+                if (note.pitch == 'R')
                 {
-                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None,/* getConnections(null, note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
-                    //Console.WriteLine("" + getConnections(null, note).ToString());
+                    staff.AddMusicalSymbol(new Rest(getSymbol(note.duration)));
                 }
+
                 else
                 {
-                    staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
-                    //Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
+                    if (i == 0)
+                    {
+                        staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None,/* getConnections(null, note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                        //Console.WriteLine("" + getConnections(null, note).ToString());
+                    }
+                    else
+                    {
+                        staff.AddMusicalSymbol(new Note(note.pitch.ToString(), note.type, note.octave, getSymbol(note.duration), getDirection(note.directionUp), NoteTieType.None, /*getConnections(song.notes[i-1], note)*/ new List<NoteBeamType>() { NoteBeamType.Single }) { NumberOfDots = note.point });
+                        //Console.WriteLine("" + getConnections(song.notes[i - 1], note)[0]);
+                    }
                 }
             }
 

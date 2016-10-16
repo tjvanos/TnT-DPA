@@ -75,7 +75,7 @@
     <Compile Include="Commands\ClefCommand.cs" />
     <Compile Include="Commands\SavePDFCommand.cs" />
     <Compile Include="Commands\SaveCommandcs.cs" />
-    <Compile Include="DeezNuts.cs" />
+    <Compile Include="DeezNut.cs" />
     <Compile Include="Handlers\EtcHandler.cs" />
     <Compile Include="Handlers\MusicHandler.cs" />
     <Compile Include="Handlers\ExplorerHandler.cs" />
