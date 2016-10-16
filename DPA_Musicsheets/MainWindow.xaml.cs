@@ -212,7 +212,7 @@ namespace DPA_Musicsheets
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (loadedLilypond != editor.Text)
+            if (loadedLilypond != editor.Text && loadedLilypond != null)
             {
                 switch (MessageBox.Show("Do you want to save before quitting?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning))
                 {
@@ -441,7 +441,7 @@ namespace DPA_Musicsheets
             System.Windows.Input.Key key = (e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
             _keysDown.Remove(key);
 
-            if (_keysDown.Count>3)
+            if (_keysDown.Count > 3)
             {
                 _keysDown.Clear();
             }
