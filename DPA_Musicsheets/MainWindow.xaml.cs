@@ -5,21 +5,12 @@ using Sanford.Multimedia.Midi;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Controls;
 
 namespace DPA_Musicsheets
 {
@@ -30,6 +21,7 @@ namespace DPA_Musicsheets
     {
         private MidiPlayer _player;
         private string workingState;
+        private string loadedLilypond;
         private DateTime _now;
         private Timer _timer = new Timer();
         private bool _typed = false;
@@ -197,6 +189,7 @@ namespace DPA_Musicsheets
                 editor.Text = System.IO.File.ReadAllText(txt_FilePath.Text);
                 tabCtrl_MidiContent.Visibility = Visibility.Hidden;
                 workingState = editor.Text;
+                loadedLilypond = editor.Text;
             }
 
 
@@ -215,10 +208,48 @@ namespace DPA_Musicsheets
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _outputDevice.Close();
-            if (_player != null)
+            if (loadedLilypond != editor.Text)
             {
-                _player.Dispose();
+                switch (MessageBox.Show("Do you want to save before quitting?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning))
+                {
+                    case MessageBoxResult.Yes:
+                        // Configure save file dialog box
+                        Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                        dlg.FileName = "MyLilypond"; // Default file name
+                        dlg.DefaultExt = ".ly"; // Default file extension
+                        dlg.Filter = "Text documents (.ly)|*.ly"; // Filter files by extension
+
+                        // Show save file dialog box
+                        Nullable<bool> result = dlg.ShowDialog();
+
+                        // Process save file dialog box results
+                        if (result == true)
+                        {
+                            // Save document
+                            string filename = dlg.FileName;
+                            File.WriteAllText(filename, editor.Text);
+                        }
+                        e.Cancel = true;
+                        break;
+                    case MessageBoxResult.No:
+                        _outputDevice.Close();
+                        if (_player != null)
+                            _player.Dispose();
+                        if (_timer != null)
+                            _timer.Dispose();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
+            else
+            {
+                _outputDevice.Close();
+                if (_player != null)
+                    _player.Dispose();
+                if (_timer != null)
+                    _timer.Dispose();
             }
         }
 
@@ -416,5 +447,8 @@ namespace DPA_Musicsheets
             }
         }
 
+
     }
+
+
 }
