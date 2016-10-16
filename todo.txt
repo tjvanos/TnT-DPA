@@ -1,45 +1,45 @@
-eigen domein klassen							10% 0/3 completed
-	volledig							-
+eigen domein klassen							10% 1/3 completed
+	volledig							- Done
 	structural paterns om rusten noten etc te representeren		-
-	patronen voor uitbreidbaarheid					-
-MIDI									20% 2/5 completed
+	patronen voor uitbreidbaarheid					- Done
+MIDI									20% 5/5 completed
 	in lezen							- Done
 	noteOn en data 2 mogelijk					- Done
-	creatiepatroon gescheiden van midikennis			-
-	creatiepatroon kan noten maken zonder switch if else		-
-	een doel per methode						-
-Noten weergeven								10% 2/6 completed
-	Correcte weergave						-
+	creatiepatroon gescheiden van midikennis			- Done
+	creatiepatroon kan noten maken zonder switch if else		- Done
+	een doel per methode						- Done
+Noten weergeven								10% 3/6 completed
+	Correcte weergave						- Done
 	domeinklassen geen kennis wpf					- Done
 	processlogica geen kennis wpf					- Done
 	behavioural patroon gebruikt voor creeren wpf			-
 	geen if else switch nodig voor rust of gewone noot		-
 	balken toevoegen als het buiten het beeld zou vallen		-
-Lilypond								20% 1/8 completed
+Lilypond								20% 2/8 completed
 	correct inlezen							- Done
-	weggeschreven worden (opslaan als)				-
+	weggeschreven worden (opslaan als)				- Done
 	processlogica geen kennis van lilypond				-
 	domeinklassen geen kennis van lillypond				-
 	een doel per methode						-
 	met/zonder maatstrepen ondersteund				-
 	maatwisselingen ondersteund					-
 	patronen uitbreidbaarheid					-
-editor1									15% 2/8 completed
+editor1									15% 2.5/8 completed
 	langer dan 1.5 sec niet typen generen				- Done
 	doortypen tijdens generen					- Done
-	eventuele undo 							-
+	eventuele undo 							- soort van
 	opslaan bij afsluiten						-
 	state en memento pattern toegepast volgens regels		-
 	geen onnodige if else 						-
 	een doel per methode						-
 	state pattern kent zelf de volgende state niet			-
-editor2									15% 0/6 completed
-	keyboard shortcuts						-	
-	chain of responsibillity patern					-
-	command patern							-
-	command pattern kent the shortcuts niet				-
-	command pattern hergebruikt code				-
-	3 toetsen bij elkaar combinatie					-
+editor2									15% 5.5/6 completed
+	keyboard shortcuts						- Done	
+	chain of responsibillity patern					- Done
+	command patern							- Done
+	command pattern kent the shortcuts niet				- Done
+	command pattern hergebruikt code				- Done
+	3 toetsen bij elkaar combinatie					- Done
 extra									10% 1/5 completed
 	herhalingen ondersteunen					-
 	doorlinken noten						-

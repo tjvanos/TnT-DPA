@@ -25,7 +25,7 @@ namespace DPA_Musicsheets.Commands
         public void execute()
         {
             //add the tempo
-            box.Text = box.Text.Insert(box.SelectionStart, " \n   \\time " + time);
+            box.Text = box.Text.Insert(box.SelectionStart, " \n  \\time " + time);
         }
     }
 }
