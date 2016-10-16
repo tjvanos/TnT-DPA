@@ -7,7 +7,7 @@ using Sanford.Multimedia.Midi;
 
 namespace DPA_Musicsheets
 {
-    public class DeezNuts
+    public class DeezNut
     {
         public char pitch { get; set; }
         public int octave { get; set; }

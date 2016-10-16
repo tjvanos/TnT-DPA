@@ -13,6 +13,6 @@ namespace DPA_Musicsheets
         // = new int[2] bijv. 4/4
         public int tempo { get; set; }
 
-        public List<DeezNuts> notes = new List<DeezNuts>() ;
+        public List<DeezNut> notes = new List<DeezNut>() ;
     }
 }

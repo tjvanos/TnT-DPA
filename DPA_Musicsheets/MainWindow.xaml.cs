@@ -118,7 +118,7 @@ namespace DPA_Musicsheets
 
             for (int i = 0; i < song.notes.Count(); i++)
             {
-                DeezNuts note = song.notes[i];
+                DeezNut note = song.notes[i];
                 if (counter >= max)
                 {
                     counter = 0.0;
@@ -245,7 +245,7 @@ namespace DPA_Musicsheets
                 return NoteStemDirection.Up;
         }
 
-        private List<NoteBeamType> getConnections(DeezNuts prev, DeezNuts current)
+        private List<NoteBeamType> getConnections(DeezNut prev, DeezNut current)
         {
             if (prev == null)
             {
@@ -401,6 +401,11 @@ namespace DPA_Musicsheets
 
             System.Windows.Input.Key key = (e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key);
             _keysDown.Remove(key);
+
+            if (_keysDown.Count>3)
+            {
+                _keysDown.Clear();
+            }
         }
 
     }

@@ -102,7 +102,7 @@ namespace DPA_Musicsheets
                             }
 
                             //Create new Note
-                            DeezNuts note = handler.createNote(currentPitch, currentOctave, pitch, duration, point);
+                            DeezNut note = handler.createNote(currentPitch, currentOctave, pitch, duration, point);
                             handler.song.notes.Add(note);
 
                             if (!pitch.Equals("R"))

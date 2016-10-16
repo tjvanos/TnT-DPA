@@ -12,6 +12,7 @@ namespace DPA_Musicsheets.Handlers
     {
         ClefCommand clefHandler = new ClefCommand();
         TempoCommand tempoHandler = new TempoCommand();
+        TimeCommand timeHandler = new TimeCommand();
         TextBox currentText; //is de textbox, currentText.Text is de inhoud
 
         public void setBox(TextBox box)
@@ -39,6 +40,29 @@ namespace DPA_Musicsheets.Handlers
                 tempoHandler.execute();
 
                 return true;
+            }
+            else if (request.Contains(System.Windows.Input.Key.T) && request.Contains(System.Windows.Input.Key.LeftAlt))
+            {
+                Console.WriteLine("time toevoegen");
+                timeHandler.setBox(currentText);
+
+                if (request.Count > 2)
+                {
+                    switch (request[2])
+                    {
+                        case System.Windows.Input.Key.D3:
+                            timeHandler.setTime("3/4");
+                            break;
+                        case System.Windows.Input.Key.D6:
+                            timeHandler.setTime("6/8");
+                            break;
+                    }
+
+                    timeHandler.execute();
+                }
+
+
+
             }
             //etc.
             else if (successor != null)

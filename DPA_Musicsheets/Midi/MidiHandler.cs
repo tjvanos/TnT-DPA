@@ -10,7 +10,7 @@ namespace DPA_Musicsheets
     {
 
         public Song song = new Song();
-        DeezNuts note = new DeezNuts();
+        DeezNut note = new DeezNut();
         int tempAbsoluteTicks;
         
         static string[] pitches = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
@@ -25,7 +25,7 @@ namespace DPA_Musicsheets
             }
             else//start note, geluid van een noot begint
             {
-                note = new DeezNuts();
+                note = new DeezNut();
                 tempAbsoluteTicks = absoluteTicks;
                 note.setOctave(pitch);
                 note.setPitch(pitch, pitches);

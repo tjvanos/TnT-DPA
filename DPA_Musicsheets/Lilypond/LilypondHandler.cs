@@ -47,10 +47,10 @@ namespace DPA_Musicsheets
             song = new Song();
         }
 
-        internal DeezNuts createNote(char currentPitch, int currentOctave, string pitch, int duration, int point)
+        internal DeezNut createNote(char currentPitch, int currentOctave, string pitch, int duration, int point)
         {
             //Create a new note and set some values
-            DeezNuts note = new DeezNuts();
+            DeezNut note = new DeezNut();
 
             Char mainPitch = Char.ToUpper(pitch[0]);
             note.point = point;
